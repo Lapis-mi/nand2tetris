@@ -43,22 +43,23 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+    // x y
     Zero16(in=x, sel=zx, out=zxout);
     Nega16(in=zxout, sel=nx, out=nxzxout);
     Zero16(in=y, sel=zy, out=zyout);
     Nega16(in=zyout, sel=ny, out=nyzyout);
 
-    // (x or y) and f
+    // f
     And16(a=nxzxout, b=nyzyout, out=andout);
     Add16(a=nxzxout, b=nyzyout, out=addout);
     Mux16(a=andout, b=addout, sel=f, out=muxout);
     Nega16(in=muxout, sel=no, out[0..7]=preout1, out[8..14]=preout2, out[15]=preout3);
     And16(a[0..7]=preout1, a[8..14]=preout2, a[15]=preout3, b=true, out=out);
 
-    // ng(負)
+    // ng
     And(a=preout3, b=true, out=ng);
 
-    // zr(0)
+    // zr
     Or8Way(in=preout1, out=zr1);
     Or8Way(in[0..6]=preout2, in[7]=preout3, out=zr2);
     Or(a=zr1, b=zr2, out=zr3);
