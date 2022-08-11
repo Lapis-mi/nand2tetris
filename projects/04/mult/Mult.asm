@@ -10,3 +10,35 @@
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
 // Put your code here.
+
+// int mult = R1;
+// int i = 1;
+// while(i <= R2){
+//    mult = mult + R1
+// }
+
+  @i
+  M=1
+  @mult
+  M=0
+(LOOP)
+  @1
+  D=M
+  @i
+  D=D-M
+  @END
+  D;JLT
+  @0
+  D=M
+  @mult
+  M=M+D
+  @i
+  M=M+1
+  @LOOP
+  0;JMP
+(END)
+  @mult
+  D=M
+  @2
+  M=D
+  @END
